@@ -207,21 +207,21 @@ class AimsTemplate(CalculatorTemplate):
         scaled = parameters.pop('scaled', None)
         velocities = parameters.pop('velocities', None)
 
-        #if geo_constrain is None:
-        #    geo_constrain = 'relax_geometry' in parameters
-        #
-        #if scaled is None:
-        #    scaled = np.all(atoms.pbc)
-        #if velocities is None:
-        #    velocities = atoms.has('momenta')
-
+        if geo_constrain is None:
+            geo_constrain = 'relax_geometry' in parameters
+        
         if scaled is None:
             scaled = np.all(atoms.pbc)
-        if scaled and (geo_constrain is None):
-            geo_constrain = 'relax_geometry' in parameters      
-
         if velocities is None:
             velocities = atoms.has('momenta')
+
+
+        #if scaled is None:
+        #    scaled = np.all(atoms.pbc)
+        #if scaled and (geo_constrain is None):
+        #    geo_constrain = 'relax_geometry' in parameters
+        #if velocities is None:
+        #    velocities = atoms.has('momenta')
 
         have_lattice_vectors = atoms.pbc.any()
         have_k_grid = ('k_grid' in parameters or
